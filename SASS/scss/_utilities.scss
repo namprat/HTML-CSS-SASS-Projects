@@ -1,0 +1,40 @@
+.container {
+    max-width: $max-width;
+    margin: auto;
+}
+
+.l-leading {
+    font-size: 2rem;
+    padding-bottom: 0.75rem;
+}
+
+.m-leading {
+    font-size: 1.3rem;
+}
+
+.bottom-line {
+    height: 2px;
+    width: 3rem;
+    background: $primary-color;
+    margin: 0 auto 1rem auto;
+}
+
+%column-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+%row-flex-4 {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1rem;
+}
+
+.sub-heading {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}

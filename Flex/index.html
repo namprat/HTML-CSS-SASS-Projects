@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link
+      rel="stylesheet"
+      media="screen and (max-width:768px)"
+      href="/css/mobile.css"
+    />
+    <link
+      rel="stylesheet"
+      media="screen and (max-width:1100px)"
+      href="/css/widescreen.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/fontawesome-free-5.12.1-web/css/all.min.css"
+    />
+    <title>Naman Pratyush</title>
+  </head>
+
+  <body id="home">
+    <div id="navbar">
+      <h2>
+        <i class="fas fa-book-open fa-1x primary-color"></i>
+        <span class="primary-color">Edge</span>Ledger
+      </h2>
+
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#what">What</a></li>
+        <li><a href="#who">Who</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <section id="showcase">
+      <div class="showcase-content">
+        <!-- Model commented -->
+        <!-- <h1 class="l-heading">
+          The sky is The Limit
+        </h1>
+        <p class="lead">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et
+          architecto iure culpa vitae ab. Repellendus.
+        </p> -->
+        <h2>The Sky is THE Limit</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam iure,
+          ullam eos praesentium accusantium .
+        </p>
+
+        <a href="#whats" class="btn">Read More</a>
+      </div>
+    </section>
+
+    <section id="what" class="p-2">
+      <div class="container">
+        <h2 class="l-heading"><span class="primary-color">What</span> We Do</h2>
+        <div class="items p-1">
+          <div class="item">
+            <i class="fas fa-university fa-2x"></i>
+            <div class="item-content">
+              <h3>Investment Banking</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Quisquam, sapiente.
+              </p>
+            </div>
+          </div>
+          <div class="item">
+            <i class="fas fa-book-reader fa-2x"></i>
+            <div class="item-content">
+              <h3>Portfolio Management</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Quisquam, sapiente.
+              </p>
+            </div>
+          </div>
+          <div class="item">
+            <i class="fas fa-pencil-alt fa-2x"></i>
+            <div class="item-content">
+              <h3>Tax & Custodial</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Quisquam, sapiente.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="who">
+      <div class="img-who"></div>
+      <div class="content-who p-3">
+        <h2 class="l-heading"><span class="primary-color">Who</span> We Are</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, ea?
+          Perferendis beatae explicabo atque eaque reiciendis debitis unde
+          tempora amet nisi! Nulla soluta blanditiis architecto, adipisci
+          cupiditate dolorem officia deleniti.
+        </p>
+
+        <h3 class="py-2">Our Team</h3>
+        <ul>
+          <li>Mark Smith : CEO</li>
+          <li>Shanon : CFO</li>
+          <li>Naman : CTO</li>
+          <li>Jannet: UI Dev</li>
+          <li>Jackson: Supervisor</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="clients" class="p-1">
+      <div class="container">
+        <h2 class="l-heading">
+          <span class="primary-color">Our</span> Clients
+        </h2>
+        <div class="client-img py-1">
+          <img src="/image_resources/logos/logo1.png" alt="" />
+          <img src="/image_resources/logos/logo2.png" alt="" />
+          <img src="/image_resources/logos/logo3.png" alt="" />
+          <img src="/image_resources/logos/logo4.png" alt="" />
+          <img src="/image_resources/logos/logo5.png" alt="" />
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="contact-form p-2">
+        <h2>Contact Us</h2>
+        <p>Please Use the form below to contact us</p>
+
+        <form>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" placeholder="Enter Name" />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="text"
+              name="email"
+              id="email"
+              placeholder="Enter Email"
+            />
+          </div>
+          <div class="form-group">
+            <label for="name">Phone</label>
+            <input type="text" name="phone" id="phone" />
+          </div>
+          <div class="form-group">
+            <label for="name">Message</label>
+            <textarea
+              type="text"
+              name="Message"
+              id="Message"
+              placeholder="Enter Message"
+              rows="10"
+            >
+            </textarea>
+          </div>
+
+          <input type="button" value="Send" class="btn" />
+        </form>
+      </div>
+      <div class="map"></div>
+    </section>
+
+    <footer class="text-center">
+      <p>Copyright &copy; , EdgeLedger All Rights Reserved</p>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Local js file -->
+    <script src="./js/main.js"></script>
+    <!-- Google maps -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDq6grFX5oezaVFh81j65iGj0xA2Gfz6UY&callback=initMap"
+      async
+      defer
+    ></script>
+  </body>
+</html>
