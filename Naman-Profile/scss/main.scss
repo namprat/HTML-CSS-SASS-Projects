@@ -6,6 +6,12 @@ $main-color:#ffbc00;
 $light-color:#f4f4f4;
 $dark-color:#333;
 $medium-color:#ccc;
+$main-color-extension: #696969;
+
+* {
+    margin: 0;
+    padding: 0;
+}
 
 // tag
 .bottom-line {
@@ -193,15 +199,52 @@ body {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-gap: 1rem;
-    }
+        border: #fff solid 1px;
 
-    .project-container>* {
-        background: $light-color;
-        padding: 1rem;
-        border: #333 solid 1px;
-    }
+        >* {
+            background: $light-color;
+            padding: 1rem;
+        }
 
+        // >*:nth-child(even) {
+        //     background: #9fa9a3;
+        // }
+
+        .card {
+            padding: 2rem;
+
+            &-header {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                font-size: large;
+                font-weight: bold;
+                margin: 0.25rem 0;
+
+                >*:last-child {
+                    color: $main-color;
+                }
+            }
+
+            &-tech-used {
+                margin: 1.5rem 0;
+                display: grid;
+                grid-template-columns: 3fr 8fr;
+
+                >* {
+                    margin-bottom: 0.25rem;
+                }
+            }
+
+            &-description {
+                &-list>* {
+                    margin: 0.25rem 0;
+                }
+            }
+        }
+    }
 }
+
 
 .l-leading {
     font-size: 2rem;
@@ -209,7 +252,7 @@ body {
 }
 
 .technical-skills-heading {
-    margin-bottom: 1rem;
+    margin-bottom: 5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -254,39 +297,120 @@ body {
 }
 
 #integration {
+
     padding: 1rem;
 
     .container {
-        // padding: 1rem;
+        // padding: rem;
 
         .bottom-line {
             width: 30rem;
             background: $main-color;
         }
 
-
         .integration-container {
-            margin-top: 2rem;
+            margin-top: 1rem;
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-gap: 1rem;
+            grid-template-columns: repeat(6, 1fr);
+            grid-gap: 0.5rem;
             justify-content: center;
             align-items: center;
-
 
             img {
                 width: 150px;
                 height: 150px;
                 text-align: center;
+
             }
 
             >* {
                 justify-self: center;
-                border: 2px dotted #333;
-                width: 60%;
+                width: 250px;
+                height: 250px;
             }
-
-
         }
     }
+}
+
+#main-footer {
+    background: $dark-color;
+    color: #fff;
+    // height: 5rem;
+
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        height: 5rem;
+        align-items: center;
+    }
+
+    .footer-contact {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        >* {
+            margin-left: 0.5rem;
+        }
+    }
+}
+
+#about-d {
+    .section-title {
+        font-size: 2rem;
+        display: block;
+        padding-bottom: 0.5rem;
+        text-align: center;
+        font-weight: 100;
+        text-transform: uppercase;
+    }
+
+    .bottom-line {
+        height: 2px;
+        width: 3rem;
+        width: 15rem;
+        background: $main-color;
+        display: block;
+        margin: 0 auto 1rem auto;
+    }
+
+    .testimonials {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 0.5rem;
+
+
+        ul {
+            list-style: none;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        p {
+            border: 1px solid $medium-color;
+            border-radius: 5px;
+            padding: 0.5rem;
+
+        }
+
+        img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+    }
+}
+
+#sql-blog {
+    padding: 1rem;
+    line-height: 1.4;
+
+    p {
+        padding: 1rem;
+    }
+
+
 }

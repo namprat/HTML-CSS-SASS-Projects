@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../fontawesome-free-5.12.1-web/css/all.min.css">
+    <title>SQL Tuning</title>
+</head>
+
+<body>
+    <div id="sql-blog">
+        <div class="container">
+            <div id="graphical-execution-plan">
+                <h1>Graphical execution plan | Quick Read
+                </h1>
+
+                <p>Audience : Beginner </p>
+
+                <p>Purpose of writing a blog is give you GOLD in a short time. Idea is to write straight to the point,
+                    and
+                    not
+                    circle around to make my blog bigger and monotonous.
+                </p>
+
+                <p> <span>Optimizer</span> - A piece of software that models the way in which database relational engine
+                    works.
+                    Fuel
+                    of optimizer
+                    are statistics which sql server generates and maintains against indexes and columns.
+
+                </p>
+
+                <p>
+                    The optimizer figures out how best to implement the request represented to T-SQL query you
+                    submitted. It
+                    decides
+                    if it can access the data through indexes, what types of join to use and much more.
+                </p>
+
+                <p>
+                    <span>Statistics</span> are collected on columns and indexes within the database and describe the
+                    data
+                    distribution and the
+                    uniqueness, or the selectivity of the data. We don’t want the optimizer to read all the data in all
+                    the
+                    tables
+                    referenced in a query each time it tries to generate a plan, so it relies on statistics, a sample of
+                    data
+                    that
+                    provides a construct of data used by the optimizer to represent the entire collection.
+                </p>
+
+                <p>
+                    Estimated and Actual Execution Plan - Estimated plan is a plan which represents output of an
+                    optimizer.
+                    The
+                    steps within the plan are logical steps, because they are representative of the optimizer's view of
+                    the
+                    plan
+                    and
+                    don’t represent what actually occurs when the query runs.
+
+                </p>
+
+                <p>
+                    Whereas, Actual plan represents the output from the actual query execution. It shows data
+                    representing
+                    what
+                    happened when the query was executed.
+
+                    Estimated plans are stored in the plan cache, so accessing the data available in actual execution
+                    plan
+                    only
+                    happens by capturing execution of query
+
+                </p>
+
+                <h4>Interpreting graphical execution plan
+                </h4>
+
+                <p>
+                    Each operator has a <span>logical and a physical component</span> . They are frequently the same,
+                    but
+                    when
+                    looking at
+                    estimated plan, you are only seeing logical operators. When looking at an actual plan, you are only
+                    seeing
+                    physical operators, laid out in the logical processing order in which SQL server will retrieve the
+                    information
+                    defined by the query. This means, that we read the plans from the left to the right.
+
+                    However, you’re going to find that you will generally read the execution plan the other direction,
+                    going
+                    from
+                    right to left. This is not because the execution plans are laid out incorrectly. It’s because the
+                    physical
+                    order
+                    of operation is frequently easier to understand than the logical order of operations.
+
+                </p>
+
+                <p>
+                    You will note that there is an arrow pointing between the two icons in execution plan. This arrow
+                    represents
+                    the
+                    data passed between the operators, as represented by icons. The thickness of the arrow reflects the
+                    amount
+                    of
+                    data passed, the thicker arrow means more rows.
+
+                    Each of the icons and arrows has a pop-up window called a tooltip which you can access by hovering
+                    your
+                    mouse
+                    pointer over the icon.
+
+                </p>
+
+                <p>Common Tooltip of select operators</p>
+                <p>
+                    Here you get the numbers generated by the optimizer on the following
+                </p>
+                <ul>
+                    <li>
+                        <p>
+                            Cached plan size - How much memory the plan generated by this query will take up in the plan
+                            cache. This is a
+                            useful number when investigating cache performance issue because you wil be abkle to see
+                            which
+                            plans are taking
+                            up more memory
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Degree of parallelism - Whether this plan used multiple processor. This plan uses a single
+                            processor
+                            as
+                            shown by
+                            the value of 1
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Estimated operator cost - This is a percentage cost
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Estimated subtree cost - Tells us the accumulated optimizer cost assigned to this step and
+                            all
+                            previous
+                            steps,
+                            but remember to read from right to left. This number is meaningless in the real world, but
+                            is a
+                            mathematical
+                            evaluation used by the query optimizer to determine the cost of the operator in question
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Estimated number of rows - Calculated based on statistics available to the optimizer for the
+                            table
+                            or
+                            index in
+                            question
+
+                        </p>
+                    </li>
+                </ul>
+
+
+                <p>
+                    First are listed the physical operation and logical operation. The logical operation are the result
+                    of
+                    the
+                    optimizer’s calculations for what should happen when the query executes. The physical operators
+                    represents
+                    what
+                    actually occurred. The logical and physical operators are usually the same.
+
+                </p>
+
+                <p>
+                    After that we see estimated costs of the I/O, CPU, operators and subtree. Just like in the previous
+                    Tooltip,
+                    the
+                    subtree cost is simply the section of execution tree that we have looked at so far, working again
+                    from
+                    right
+                    to
+                    left, and top to bottom. SQL Server bases all the estimations on the statistics available on the
+                    columns
+                    and
+                    indexes in any table.
+
+                </p>
+
+                <p>
+                    The I/0 cost and CPU cost are not actual values, but rather the estimated cost numbers assigned by
+                    the
+                    query
+                    optimizer during its calculations. These numbers can be useful when considering whether most of the
+                    estimated
+                    cost is I/O based or if we’re potentially putting a load on the CPU.
+
+                </p>
+
+                <p>
+                    You will note that the operator cost and subtree cost are the same, since the table scan is the only
+                    significant
+                    operator, in terms of the work done to execute the query. For more complex trees, with more
+                    operators,
+                    you
+                    will
+                    see that the subtree cost accumulates as the individual cost for each operator is added to the
+                    total.
+
+                </p>
+
+                <p>
+                    Estimated number of rows - The plan displays this number for each operation because each operation
+                    is
+                    dealing
+                    with different sets of data. When you get to execution plans that are more complicated, we will see
+                    the
+                    number
+                    of rows change as various operators perform their work on the data as it passes between each
+                    operator.
+
+                </p>
+                <p> Another important piece of information, when troubleshooting performance issue, is the boolean value
+                    displayed
+                    for
+                    the ordered. This tell us whether the data that this operator is working with is in an ordered
+                    state.
+                    Certain
+                    operation, for example an ORDER BY CLAUSE IN A SELECT statement may require data to be in a
+                    particular
+                    order,
+                    sorted
+                    by a particular value. Knowing whether data is in an order state helps show where the extra
+                    processing
+                    may
+                    be
+                    occuring to get the data into that state.
+                </p>
+                <p>
+                    Lastly Node ID is the ordinal, which simply means numbered in the order of the node itself. When the
+                    optimizer
+                    generates a plan, it numbers the operation in the logical order of the operations.
+
+                </p>
+                <p>
+                    All these details are available to help us understand what’s happening within the query in question.
+                    We
+                    can
+                    walk
+                    through the various operators observing how the subtree cost accumulates, how the number of rows
+                    changes
+                    and
+                    so
+                    on. With these details, we can identify queries that are using an excessive amount of CPU or tables
+                    that
+                    need
+                    more indexes, or identify other performance issues.
+
+                </p>
+            </div>
+
+            <div id="identify-root-cause">
+                <h1>
+                    Top 10 steps to identify root cause of stored procedure performance issue
+
+                </h1>
+                <p>
+                    Audience - All level
+                </p>
+                <p>
+                    Before you fix any issue or solve a problem, you need to identify the cause of it. This is one of
+                    the
+                    most
+                    popular topics amongst developers for SQL tuning. I have written down important areas to look for
+                    when
+                    diagnosing performance issues related to execution plans. This is the most discussed topic on the
+                    internet
+                    and you need to have in depth understanding of various components involved in optimizing complex
+                    stored
+                    procedures.
+                </p>
+                <p>Generally speaking, there can be various reasons for slowness such as deadlock, bad index design,
+                    table
+                    scan,
+                    out of data statistics, execution plan selected by the optimizer isn’t good enough (optimizer timed
+                    out
+                    when
+                    generating optimized plan), CPU pressure, IO issue.
+                </p>
+                <p> I would personally follow below steps in order </p>
+                <ul>
+                    <li>
+                        <p>
+                            Look for Parameter sniffing - Since It’s one of the common issues with regressive queries,
+                            and
+                            it’s
+                            quick to identify, that’s why it’s mostly my first step. For someone who don’t know
+                            parameter
+                            sniffing, explaining parameter sniffing in 2-3 sentences, though it is a topic worth writing
+                            few
+                            paragraphs.
+
+                        </p>
+                        <p>
+                            If an optimizer generates different execution plans for two different input on
+                            recompilation,
+                            then
+                            the query which executes first, registers its plan in cache, and when running the query with
+                            different input parameters, optimizer skips the process of generating optimized plan and
+                            takes
+                            the
+                            one stored in cache, even though it’s the suboptimal one.
+
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Find out when the query experienced slowness and if this slowness happened because of
+                            deadlock
+                            inside
+                            the database. You can use DMOs sys.dm_exec_sessions, sys.dm_exec_requests,
+                            sys.dm_exec_sql_text
+                            to
+                            figure out what session, query is causing deadlock to happen, and what other queries are
+                            affected by
+                            it.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Each node in an execution plan shows its relative estimated cost in the complete execution
+                            plan,
+                            with the total cost of the whole plan being 100 percent. Therefore, focus attention on the
+                            nodes
+                            with the highest relative cost.
+
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Execution plan may be from a batch of statements, so you may also need to find the most
+                            costly
+                            estimated statement. In a batch statement, there will be multiple plans, and they will be
+                            numbered
+                            in the order they occurred within the batch.
+
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Quickly scan thickness of the connecting arrows between nodes. A thick connecting arrows
+                            indicate a
+                            large number of rows being transferred between the corresponding nodes. Analyze the node to
+                            the
+                            left
+                            of the arrow to understand why it requires so many rows.
+
+
+                        </p>
+                        <p>
+                            Check the property of the arrows too. You may see that the estimated rows and the actual
+                            rows
+                            are
+                            different. This can be caused by out of data statistics, amongst other things. If you see
+                            thick
+                            arrows
+                            through much of the plan and then a thin arrow at the end, it might be possible to modify
+                            the
+                            query
+                            or
+                            indexes to get the filtered done earlier in the plan
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            When examining an execution plan, look out for hash join operations. For small result sets,
+                            a
+                            nested
+                            loop join a usually the preferred join example. Hash join are not necessarily bad, and loop
+                            joins
+                            are
+                            not necessarily good. It depends on the amount of data being returned by the query
+
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            There may be warnings, indicated by an exclamation point on one of the operators, which are
+                            the
+                            areas
+                            of immediate concern. These can be caused by a variety of issues including a join without
+                            join
+                            criteria or an index or a table with missing statistics. Usually resolving the warning
+                            situation
+                            will
+                            help performance.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Look for key lookup operations. A lookup operation for a large result set can cause a large
+                            number
+                            of random reads.
+
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Very important to look for sort operation. This indicates that the data was not retrieved in
+                            the
+                            correct sort order. Again, this may be an issue, but it is an indicator of potential
+                            problems,
+                            possibly a missing or incorrect index. Ensuring that the data is sorted in a specified
+                            manner
+                            using
+                            ORDER BY is not problematic, but sort can lead to reduced performance
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Watch for operators that may be placing additional load on the system such as table spools.
+                            They
+                            may
+                            be necessary for operation of the query, or they may indicate an improperly written query or
+                            badly
+                            designed indexes.
+
+                        </p>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
